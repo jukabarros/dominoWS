@@ -21,15 +21,11 @@ public class RoomDAO implements Serializable{
 	
 	private PreparedStatement queryExec;
 	
-	private PlayerDAO playerDao;
-	
 
 	public RoomDAO() {
-		super();
 		this.DBConn = null;
 		this.query = null;
 		this.queryExec = null;
-		this.playerDao = new PlayerDAO();
 	}
 	
 	/*
@@ -56,12 +52,13 @@ public class RoomDAO implements Serializable{
 		this.queryExec = this.DBConn.prepareStatement(query);
 		ResultSet results = this.queryExec.executeQuery();
 		List<Room> roomList = new ArrayList<Room>();
+		PlayerDAO playerDao = new PlayerDAO();
 		while (results.next()){
 			Room r = new Room();
 			r.setId(results.getInt(1));
 			r.setName(results.getString(2));
 			r.setDateOfCreate(results.getDate(3));
-			r.setPlayerOwn(this.playerDao.findById(results.getInt(4)));
+			r.setPlayerOwn(playerDao.findById(results.getInt(4)));
 			r.setNumOfPlayers(results.getInt(5));
 			roomList.add(r);
 		}
@@ -81,11 +78,12 @@ public class RoomDAO implements Serializable{
 		this.queryExec.setInt(1, id);
 		ResultSet results = this.queryExec.executeQuery();
 		Room r = new Room();
+		PlayerDAO playerDao = new PlayerDAO();
 		while (results.next()){
 			r.setId(results.getInt(1));
 			r.setName(results.getString(2));
 			r.setDateOfCreate(results.getDate(3));
-			r.setPlayerOwn(this.playerDao.findById(results.getInt(4)));
+			r.setPlayerOwn(playerDao.findById(results.getInt(4)));
 			r.setNumOfPlayers(results.getInt(5));
 		}
 		this.afterExecuteQuery();
@@ -104,11 +102,12 @@ public class RoomDAO implements Serializable{
 		this.queryExec.setString(1, name);
 		ResultSet results = this.queryExec.executeQuery();
 		Room r = new Room();
+		PlayerDAO playerDao = new PlayerDAO();
 		while (results.next()){
 			r.setId(results.getInt(1));
 			r.setName(results.getString(2));
 			r.setDateOfCreate(results.getDate(3));
-			r.setPlayerOwn(this.playerDao.findById(results.getInt(4)));
+			r.setPlayerOwn(playerDao.findById(results.getInt(4)));
 			r.setNumOfPlayers(results.getInt(5));
 		}
 		this.afterExecuteQuery();

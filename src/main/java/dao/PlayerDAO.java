@@ -22,14 +22,11 @@ public class PlayerDAO implements Serializable{
 	
 	private PreparedStatement queryExec;
 	
-	private RoomDAO roomDAO;
-	
 	public PlayerDAO() {
 		super();
 		this.DBConn = null;
 		this.query = null;
 		this.queryExec = null;
-		this.roomDAO = new RoomDAO();
 	}
 
 	/*
@@ -52,10 +49,12 @@ public class PlayerDAO implements Serializable{
 	 */
 	public List<Player> getAll() throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT * FROM player ORDER BY name;";
+		this.query = "SELECT id, name, login, password, score, date_create, game_room"
+				+ " FROM player ORDER BY name;";
 		this.queryExec = this.DBConn.prepareStatement(query);
 		ResultSet results = this.queryExec.executeQuery();
 		List<Player> playerList = new ArrayList<Player>();
+		RoomDAO roomDAO = new RoomDAO();
 		while (results.next()){
 			Player p = new Player();
 			p.setId(results.getInt(1));
@@ -63,9 +62,10 @@ public class PlayerDAO implements Serializable{
 			p.setLogin(results.getString(3));
 			p.setScore(results.getInt(4));
 			p.setDateOfCreate(results.getDate(5));
-			p.setGameRoom(this.roomDAO.findById(results.getInt(6)));
+			p.setGameRoom(roomDAO.findById(results.getInt(6)));
 			playerList.add(p);
 		}
+		
 		this.afterExecuteQuery();
 		return playerList;
 	}
@@ -95,18 +95,44 @@ public class PlayerDAO implements Serializable{
 	}
 	
 	/**
-	 * Consulta pelo nome. Usado para verificar se ja existe 
+	 * Login do player
+	 * @param login login do player
+	 * @param password senha
+	 * @return player
+	 * @throws SQLException
+	 */
+	public Player doLogin(String login, String password) throws SQLException{
+		this.beforeExecuteQuery();
+		this.query = "SELECT * FROM player WHERE login = ? AND password = ?;";
+		this.queryExec = this.DBConn.prepareStatement(query);
+		this.queryExec.setString(1, login);
+		this.queryExec.setString(2, password);
+		ResultSet results = this.queryExec.executeQuery();
+		Player p = new Player();
+		while (results.next()){
+			p.setId(results.getInt(1));
+			p.setName(results.getString(2));
+			p.setLogin(results.getString(3));
+			p.setScore(results.getInt(4));
+			p.setDateOfCreate(results.getDate(5));
+		}
+		this.afterExecuteQuery();
+		return p;
+	}
+	
+	/**
+	 * Consulta pelo login. Usado para verificar se ja existe 
 	 * no banco de dados na hora da insercao.
 	 * 
-	 * @param name nome a ser consultado
+	 * @param login login a ser consultado
 	 * @return
 	 * @throws SQLException
 	 */
-	public Player findByName(String name) throws SQLException{
+	public Player findByLogin(String login) throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT * FROM player WHERE name = ?;";
+		this.query = "SELECT * FROM player WHERE login = ?;";
 		this.queryExec = this.DBConn.prepareStatement(query);
-		this.queryExec.setString(1, name);
+		this.queryExec.setString(1, login);
 		ResultSet results = this.queryExec.executeQuery();
 		Player p = new Player();
 		while (results.next()){
@@ -133,18 +159,16 @@ public class PlayerDAO implements Serializable{
 		int msgCode = 0;
 		try{
 			// Consultando se ja existe
-			Player player = this.findByName(p.getName());
-			if (player == null){
+			Player player = this.findByLogin(p.getLogin());
+			if (player.getLogin() == null){
 				this.beforeExecuteQuery();
-				
-				this.query = "INSERT INTO player (name, login, password, score, date_create, game_room) VALUES (?,?,?,?,?,?);";
+				this.query = "INSERT INTO player (name, login, password, score, date_create) VALUES (?,?,?,?,?);";
 				this.queryExec = this.DBConn.prepareStatement(query);
 				this.queryExec.setString(1, p.getName());
 				this.queryExec.setString(2, p.getLogin());
 				this.queryExec.setString(3, p.getPassword());	
-				this.queryExec.setInt(4, p.getScore());
+				this.queryExec.setInt(4, 0);
 				this.queryExec.setDate(5, p.getDateOfCreate());
-				this.queryExec.setInt(6, p.getGameRoom().getId());
 				this.queryExec.execute();
 				
 				this.afterExecuteQuery();

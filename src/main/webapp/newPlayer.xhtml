@@ -11,24 +11,27 @@
 <title>Domino WS</title>
 </h:head>
 <h:body>
+<h:panelGrid columns="1">
 	<p:panel header="Cadastro Novo Jogador">
+		<h:button type="button" value="Voltar" outcome="index" />
 		<h5><b>* Campos Obrigatórios</b></h5>
 		<h:form id="formCreate">
 		<p:messages autoUpdate="true" />
 			<h:panelGrid columns="2" cellpadding="4">
-			 Nome*:<p:inputText value="" label ="Nome" 
+			 Nome*:<p:inputText value="#{playerController.player.name}" label ="Nome" 
 	            		required="true" requiredMessage="Campo Nome é obrigatório" />
 			
-			 Login*:<p:inputText value="" label ="Login" 
+			 Login*:<p:inputText value="#{playerController.player.login}" label ="Login" 
 	            		required="true" requiredMessage="Campo Login é obrigatório" />
 	            
-	         Senha*:<p:password value="" label="Password" 
+	         Senha*:<p:password value="#{playerController.player.password}" label="Password" 
 	            		required="true" requiredMessage="Campo Senha é obrigatório" />
 			
 			  &nbsp;
-        	  <h:commandButton type="submit" value="Cadastrar" action="#" /> 
+        	  <h:commandButton type="submit" value="Cadastrar" action="#{playerController.insert}" /> 
 			</h:panelGrid>
 		</h:form>
 	</p:panel>
+</h:panelGrid>
 </h:body>
 </html>

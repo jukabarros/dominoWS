@@ -81,4 +81,9 @@ public class Player implements Serializable{
 		this.gameRoom = gameRoom;
 	}
 
+	@Override
+	public String toString() {
+		return "Player [id=" + id + ", login=" + login + "]";
+	}
+
 }

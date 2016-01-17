@@ -14,48 +14,26 @@
 <div align="center">
 <h:panelGrid columns="1">
 	<p:panel header="Login" id="panelLogin">
+		<h:button value="Novo" outcome="newPlayer" />
 		<h:form id="formLogin">
 			<p:messages autoUpdate="true" />
 			<h:panelGrid columns="2" cellpadding="4">
 	          
-	           Login:<p:inputText value="" label ="Login" 
+	           Login:<p:inputText value="#{loginController.login}" label ="Login" 
 	           		required="true" requiredMessage="Campo Login é obrigatório" />
 	           
-	           Senha:<p:password value="" label="Password" 
+	           Senha:<p:password value="#{loginController.password}" label="Password" 
 	           		required="true" requiredMessage="Campo Senha é obrigatório" />
 	         
 	       	  &nbsp;
-	       	  <h:commandButton type="submit" value="Entrar" action="#">
-	       	  	<f:ajax  execute="@form" render="@form"/>
-	       	  </h:commandButton>  
+	       	  <h:commandButton type="submit" 
+	       	   value="Entrar" action="#{loginController.doLogin}" />
+	       	  
 			</h:panelGrid>
 		</h:form>
 		
 	</p:panel>
-	
-	
-	<p:panel header="Cadastro Novo Jogador" id="panelCreate">
-		<h5><b>* Campos Obrigatórios</b></h5>
-		<h:form id="formCreate">
-		<p:messages autoUpdate="true" />
-			<h:panelGrid columns="2" cellpadding="4">
-			 Nome*:<p:inputText value="" label ="Nome" 
-	            		required="true" requiredMessage="Campo Nome é obrigatório" />
-			
-			 Login*:<p:inputText value="" label ="Login" 
-	            		required="true" requiredMessage="Campo Login é obrigatório" />
-	            
-	         Senha*:<p:password value="" label="Password" 
-	            		required="true" requiredMessage="Campo Senha é obrigatório" />
-			
-			  &nbsp;
-        	  <h:commandButton type="submit" value="Cadastrar" action="#">
-	       	  	<f:ajax  execute="@form" render="@form" />
-	       	  </h:commandButton> 
-	       	  
-			</h:panelGrid>
-		</h:form>
-	</p:panel>
+
 </h:panelGrid>
 </div>
 </h:body>
