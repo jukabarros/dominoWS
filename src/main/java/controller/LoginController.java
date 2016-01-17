@@ -57,6 +57,10 @@ public class LoginController implements Serializable{
 		return "logout";
 	}
 	
+	public String gotoNewPlayer(){
+		return "newPlayer";
+	}
+	
 	// GET AND SET
 	public Player getPlayer() {
 		return player;

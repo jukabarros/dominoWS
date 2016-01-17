@@ -72,7 +72,7 @@ public class PlayerController implements Serializable{
 	/**
 	 * Exclui um player do sistema
 	 */
-	public String deleteCategoria(){
+	public String delete(){
 		try{
 			this.service.delete(this.player);
 			refreshListPlayers();
@@ -112,6 +112,10 @@ public class PlayerController implements Serializable{
 
 	}
 
+	public String gotoIndex(){
+		return "index";
+	}
+	
 	// Get and Set
 	public Player getPlayer() {
 		return player;

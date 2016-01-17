@@ -14,7 +14,6 @@
 <div align="center">
 <h:panelGrid columns="1">
 	<p:panel header="Login" id="panelLogin">
-		<h:button value="Novo" outcome="newPlayer" />
 		<h:form id="formLogin">
 			<p:messages autoUpdate="true" />
 			<h:panelGrid columns="2" cellpadding="4">
@@ -31,6 +30,11 @@
 	       	  
 			</h:panelGrid>
 		</h:form>
+		<h:panelGrid columns="1" width="100%" style="text-align: right;">
+			<h:form id="links">
+				<h:commandLink value="Novo Jogador" action="#{loginController.gotoNewPlayer}" />
+			</h:form>
+		</h:panelGrid>
 		
 	</p:panel>
 

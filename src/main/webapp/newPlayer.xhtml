@@ -13,9 +13,12 @@
 <h:body>
 <h:panelGrid columns="1">
 	<p:panel header="Cadastro Novo Jogador">
-		<h:button type="button" value="Voltar" outcome="index" />
-		<h5><b>* Campos Obrigatórios</b></h5>
+		<h:form id="links">
+			<h:commandLink value="Voltar para o login" action="#{playerController.gotoIndex}" />
+		</h:form>
+	
 		<h:form id="formCreate">
+		<h5><b>* Campos Obrigatórios</b></h5>
 		<p:messages autoUpdate="true" />
 			<h:panelGrid columns="2" cellpadding="4">
 			 Nome*:<p:inputText value="#{playerController.player.name}" label ="Nome" 

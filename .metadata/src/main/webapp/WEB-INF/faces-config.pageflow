@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14527147642060" configfile="/dominoWS/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" id="pf14530518244950" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14530518673497 pf145305195137612" inlinks="pf14530518244952" path="index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="*" id="pf14530518244954" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14530518244952" path="*"/>
-  <nodes xsi:type="pageflow:PFPage" name="game/game.xhtml" id="pf14530518673498" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14530518673497" path="/game/game.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="newPlayer.xhtml" id="pf145305195137613" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf145305195137612" path="newPlayer.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="178" id="pf14530518244950" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14530518673497 pf14530582338850" inlinks="pf14530518244952" path="index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="178" id="pf14530518244954" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14530518244952" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="game/game.xhtml" x="554" y="178" id="pf14530518673498" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14530518673497" path="/game/game.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="newPlayer.xhtml" x="122" y="562" id="pf145305195137613" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14530582338850" path="newPlayer.xhtml"/>
   <links id="pf14530518244952" target="pf14530518244950" source="pf14530518244954" outcome="logout" redirect="true"/>
   <links id="pf14530518673497" target="pf14530518673498" source="pf14530518244950" outcome="login" redirect="true"/>
-  <links id="pf145305195137612" target="pf145305195137613" source="pf14530518244950" outcome="newPlayer" redirect="true"/>
+  <links id="pf14530582338850" target="pf145305195137613" source="pf14530518244950" outcome="newPlayer" redirect="true"/>
 </pageflow:Pageflow>

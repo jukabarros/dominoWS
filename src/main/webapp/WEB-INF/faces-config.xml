@@ -28,4 +28,26 @@
 
 </navigation-rule>
 
+<!-- newPlayer -->
+<navigation-rule>
+	<from-view-id>index.xhtml</from-view-id>
+     <navigation-case>
+      <from-outcome>newPlayer</from-outcome>
+      <to-view-id>newPlayer.xhtml</to-view-id>
+      <redirect />
+	</navigation-case>
+
+</navigation-rule>
+
+<!-- Index -->
+<navigation-rule>
+	<from-view-id>newPlayer</from-view-id>
+     <navigation-case>
+      <from-outcome>index</from-outcome>
+      <to-view-id>index.xhtml</to-view-id>
+      <redirect />
+	</navigation-case>
+
+</navigation-rule>
+
 </faces-config>
