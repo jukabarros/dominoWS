@@ -15,7 +15,7 @@ import model.Player;
 public class PlayerDAO implements Serializable{
 
 	private static final long serialVersionUID = -2298488730467654357L;
-
+	
 	private Connection DBConn;
 	
 	private String query;
@@ -49,7 +49,7 @@ public class PlayerDAO implements Serializable{
 	 */
 	public List<Player> getAll() throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT id, name, login, password, score, date_create, game_room"
+		this.query = "SELECT id, name, login, score, date_create, game_room"
 				+ " FROM player ORDER BY name;";
 		this.queryExec = this.DBConn.prepareStatement(query);
 		ResultSet results = this.queryExec.executeQuery();
@@ -78,17 +78,20 @@ public class PlayerDAO implements Serializable{
 	 */
 	public Player findById(Integer id) throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT * FROM player WHERE id = ?;";
+		this.query = "SELECT id, name, login, score, date_create, game_room"
+				+ " FROM player WHERE id = ?;";
 		this.queryExec = this.DBConn.prepareStatement(query);
 		this.queryExec.setInt(1, id);
 		ResultSet results = this.queryExec.executeQuery();
 		Player p = new Player();
+		RoomDAO roomDAO = new RoomDAO();
 		while (results.next()){
 			p.setId(results.getInt(1));
 			p.setName(results.getString(2));
 			p.setLogin(results.getString(3));
 			p.setScore(results.getInt(4));
 			p.setDateOfCreate(results.getDate(5));
+			p.setGameRoom(roomDAO.findById(results.getInt(6)));
 		}
 		this.afterExecuteQuery();
 		return p;
@@ -103,18 +106,21 @@ public class PlayerDAO implements Serializable{
 	 */
 	public Player doLogin(String login, String password) throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT * FROM player WHERE login = ? AND password = ?;";
+		this.query = "SELECT id, name, login, score, date_create, game_room "
+				+ "FROM player WHERE login = ? AND password = ?;";
 		this.queryExec = this.DBConn.prepareStatement(query);
 		this.queryExec.setString(1, login);
 		this.queryExec.setString(2, password);
 		ResultSet results = this.queryExec.executeQuery();
 		Player p = new Player();
+		RoomDAO roomDAO = new RoomDAO();
 		while (results.next()){
 			p.setId(results.getInt(1));
 			p.setName(results.getString(2));
 			p.setLogin(results.getString(3));
 			p.setScore(results.getInt(4));
 			p.setDateOfCreate(results.getDate(5));
+			p.setGameRoom(roomDAO.findById(results.getInt(6)));
 		}
 		this.afterExecuteQuery();
 		return p;
@@ -130,17 +136,20 @@ public class PlayerDAO implements Serializable{
 	 */
 	public Player findByLogin(String login) throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT * FROM player WHERE login = ?;";
+		this.query = "SELECT id, name, login, score, date_create, game_room"
+				+ " FROM player WHERE login = ?;";
 		this.queryExec = this.DBConn.prepareStatement(query);
 		this.queryExec.setString(1, login);
 		ResultSet results = this.queryExec.executeQuery();
 		Player p = new Player();
+		RoomDAO roomDAO = new RoomDAO();
 		while (results.next()){
 			p.setId(results.getInt(1));
 			p.setName(results.getString(2));
 			p.setLogin(results.getString(3));
 			p.setScore(results.getInt(4));
 			p.setDateOfCreate(results.getDate(5));
+			p.setGameRoom(roomDAO.findById(results.getInt(6)));
 		}
 		this.afterExecuteQuery();
 		return p;

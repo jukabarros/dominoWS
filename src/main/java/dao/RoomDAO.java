@@ -48,7 +48,8 @@ public class RoomDAO implements Serializable{
 	 */
 	public List<Room> getAll() throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT * FROM room ORDER BY date_create;";
+		this.query = "SELECT id, name, date_create, player_own, num_players"
+				+ " FROM room ORDER BY date_create;";
 		this.queryExec = this.DBConn.prepareStatement(query);
 		ResultSet results = this.queryExec.executeQuery();
 		List<Room> roomList = new ArrayList<Room>();
@@ -73,7 +74,8 @@ public class RoomDAO implements Serializable{
 	 */
 	public Room findById(Integer id) throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT * FROM room WHERE id = ?;";
+		this.query = "SELECT id, name, date_create, player_own, num_players"
+				+ " FROM room WHERE id = ?;";
 		this.queryExec = this.DBConn.prepareStatement(query);
 		this.queryExec.setInt(1, id);
 		ResultSet results = this.queryExec.executeQuery();
@@ -97,7 +99,8 @@ public class RoomDAO implements Serializable{
 	 */
 	public Room findByName(String name) throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT * FROM room WHERE name = ?;";
+		this.query = "SELECT id, name, date_create, player_own, num_players"
+				+ " FROM room WHERE name = ?;";
 		this.queryExec = this.DBConn.prepareStatement(query);
 		this.queryExec.setString(1, name);
 		ResultSet results = this.queryExec.executeQuery();
