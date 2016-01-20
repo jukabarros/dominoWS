@@ -27,7 +27,7 @@ public class GameService implements Serializable{
 		}
 	}
 	
-	public Game findByName(String name){
+	public List<Game> findByName(String name){
 		try{
 			return this.dao.findByName(name);
 		}catch(SQLException e){

@@ -79,8 +79,7 @@ public class GameController implements Serializable{
 			refreshListRooms(); 	
 		}
 		else{
-			this.listGames.clear();
-			this.listGames.add(this.service.findByName(this.searchInput));	
+			this.listGames = this.service.findByName(this.searchInput);
 		}
 		return null;
 	}

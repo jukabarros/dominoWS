@@ -92,10 +92,36 @@ public class GameDAO implements Serializable{
 	
 	/**
 	 * Consulta a sala pelo nome
-	 * @return g sala
+	 * @return games lista de sala
 	 * @throws SQLException
 	 */
-	public Game findByName(String name) throws SQLException{
+	public List<Game> findByName(String name) throws SQLException{
+		this.beforeExecuteQuery();
+		this.query = "SELECT id, name, date_create, num_players, num_max_players"
+				+ " FROM game WHERE name LIKE ? ORDER BY name;";
+		this.queryExec = this.DBConn.prepareStatement(query);
+		this.queryExec.setString(1, "%"+name+"%");
+		ResultSet results = this.queryExec.executeQuery();
+		List<Game> listGames = new ArrayList<Game>();
+		while (results.next()){
+			Game g = new Game();
+			g.setId(results.getInt(1));
+			g.setName(results.getString(2));
+			g.setDateOfCreate(results.getDate(3));
+			g.setNumOfPlayers(results.getInt(4));
+			g.setNumMaxPlayers(results.getInt(5));
+			listGames.add(g);
+		}
+		this.afterExecuteQuery();
+		return listGames;
+	}
+	
+	/**
+	 * Consulta a sala pelo nome exato
+	 * @return game sala
+	 * @throws SQLException
+	 */
+	private Game checkName(String name) throws SQLException{
 		this.beforeExecuteQuery();
 		this.query = "SELECT id, name, date_create, num_players, num_max_players"
 				+ " FROM game WHERE name = ?;";
@@ -127,8 +153,8 @@ public class GameDAO implements Serializable{
 		int msgCode = 0;
 		try{
 			// Consultando se ja existe
-			Game room = this.findByName(g.getName());
-			if (room == null){
+			Game game = this.checkName(g.getName());
+			if (game == null){
 				this.beforeExecuteQuery();
 				
 				this.query = "INSERT INTO game (name, date_create, num_max_players) VALUES (?,?,?);";
