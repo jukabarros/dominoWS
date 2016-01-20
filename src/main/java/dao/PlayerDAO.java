@@ -52,7 +52,7 @@ public class PlayerDAO implements Serializable{
 	 */
 	public List<Player> getAll() throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT id, name, login, score, date_create, game_room"
+		this.query = "SELECT id, name, login, score, date_create, game_play"
 				+ " FROM player ORDER BY name;";
 		this.queryExec = this.DBConn.prepareStatement(query);
 		ResultSet results = this.queryExec.executeQuery();
@@ -80,7 +80,7 @@ public class PlayerDAO implements Serializable{
 	 */
 	public Player findById(Integer id) throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT id, name, login, score, date_create, game_room"
+		this.query = "SELECT id, name, login, score, date_create, game_play"
 				+ " FROM player WHERE id = ?;";
 		this.queryExec = this.DBConn.prepareStatement(query);
 		this.queryExec.setInt(1, id);
@@ -107,7 +107,7 @@ public class PlayerDAO implements Serializable{
 	 */
 	public Player doLogin(String login, String password) throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT id, name, login, score, date_create, game_room "
+		this.query = "SELECT id, name, login, score, date_create, game_play "
 				+ "FROM player WHERE login = ? AND password = ?;";
 		this.queryExec = this.DBConn.prepareStatement(query);
 		this.queryExec.setString(1, login);
@@ -136,7 +136,7 @@ public class PlayerDAO implements Serializable{
 	 */
 	public Player findByLogin(String login) throws SQLException{
 		this.beforeExecuteQuery();
-		this.query = "SELECT id, name, login, score, date_create, game_room"
+		this.query = "SELECT id, name, login, score, date_create, game_play"
 				+ " FROM player WHERE login = ?;";
 		this.queryExec = this.DBConn.prepareStatement(query);
 		this.queryExec.setString(1, login);
