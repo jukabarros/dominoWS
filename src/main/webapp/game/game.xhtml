@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Domino WS</title>
+</h:head>
+<h:body>
+<p:panel id="panelHeader">
+<h:panelGrid columns="2" id="panelGridHeader" width="100%">
+<h2>Dominó WebSocket</h2>
+
+	<h:form>
+		<div align="right">
+		<h:panelGrid columns="2" id="panelGridHeaderModulo2">
+	
+		    <p:menuButton  value="#{loginController.player.login}">
+		    	<p:menuitem value="Dados Pessoais" actionListener="#" />
+		        <p:menuitem value="Sair" action="#{loginController.doLogout}" />
+		    </p:menuButton>
+		    
+		</h:panelGrid>
+		</div>
+	</h:form>
+
+</h:panelGrid>
+</p:panel>
+
+<h:panelGrid columns="4" cellpadding="3"> 
+	<h:form id="formPesquisar">      
+	
+	   <h:inputText id="idSearch" value="#{gameController.searchInput}"
+	   	 name="searchRoom" label ="search" />   
+	   <h:commandButton value ="Pesquisar" title="Pesquisar" 
+	   	 action="#{gameController.findByName}" id="searchGame" />
+		 
+	   <!-- Linkando Para Outra Pagina JSF outcome="Arquivo.jsf"  --> 
+	   <h:button type="button" value="Novo" outcome="newGame" />
+	   
+	   <h:commandButton value ="Atualizar" title="Atualizar" 
+	   	 action="#{gameController.refreshListRooms}" />
+	   
+ </h:form>
+</h:panelGrid>
+
+<p:panel id="gamesPanel" header="Jogos" style="text-align:center;width:auto;" >		
+	    		
+	<p:dataTable value="#{gameController.listGames}"
+			     id="gameTable"
+			     emptyMessage="Nenhuma sala encontrada"
+			     rowIndexVar="var"
+			     paginator="true"
+			     paginatorPosition="bottom"
+			     firstPageLinkLabel="Primeira"
+			     previousPageLinkLabel="Anterior"
+			     nextPageLinkLabel="Próxima"
+			     lastPageLinkLabel="Última"
+			     rows="15"
+			     var="g"
+			     width="auto">
+	  					     
+ 				<p:column>
+ 				<f:facet name="header">
+					<h:outputText value="Nome" />
+				</f:facet>
+					<h:outputText value="#{g.name}"  />	
+ 				</p:column>
+	 				
+ 				<p:column>
+ 				<f:facet name="header">
+					<h:outputText value="Número de Jogadores" />
+				</f:facet>
+					<h:outputText value="#{g.numOfPlayers} / #{g.numMaxPlayers}"  />	
+ 				</p:column>
+	 				
+ 				<p:column>
+ 					<f:facet name="header">
+				<h:outputText value="Data" />
+					</f:facet>
+					<h:outputText value="#{g.dateOfCreate}"  />	
+ 				</p:column>
+	 				
+	 								
+ 				<p:column>
+ 				<f:facet name="header">
+ 					<h:outputText value="Entrar"/>
+ 				</f:facet>
+				
+				
+				<p:commandButton title="Entrar" process="@this" id="JoinRoomButton"
+					style="margin-right: 5px;" icon="ui-icon-triangle-1-e" action="#{gameController.joinRoom}">
+                    <f:setPropertyActionListener target="#{gameController.game}" value="#{g}" />
+                 </p:commandButton>
+                 <p:tooltip for="JoinRoomButton" value="Entrar na sala" />
+                 
+               </p:column>    
+	 			  
+		</p:dataTable>
+		
+</p:panel>
+
+</h:body>
+</html>

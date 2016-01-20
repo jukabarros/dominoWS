@@ -56,7 +56,7 @@ public class PlayerController implements Serializable{
 				this.player = new Player();
 			}else{
 				facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-						"Player já existe no sistema", "")); 
+						"Player já existe no jogo", "")); 
 			}
 			
 		}catch(Exception e){

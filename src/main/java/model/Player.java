@@ -19,7 +19,7 @@ public class Player implements Serializable{
 	
 	private Date dateOfCreate;
 	
-	private Room gameRoom;
+	private Game gamePlay;
 
 	public Player() {
 		super();
@@ -73,12 +73,12 @@ public class Player implements Serializable{
 		this.dateOfCreate = dateOfCreate;
 	}
 
-	public Room getGameRoom() {
-		return gameRoom;
+	public Game getGamePlay() {
+		return gamePlay;
 	}
 
-	public void setGameRoom(Room gameRoom) {
-		this.gameRoom = gameRoom;
+	public void setGamePlay(Game gamePlay) {
+		this.gamePlay = gamePlay;
 	}
 
 	@Override

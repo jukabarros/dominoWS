@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Room implements Serializable{
+public class Game implements Serializable{
 	
 	private static final long serialVersionUID = 5210182474779892892L;
 
@@ -13,11 +13,11 @@ public class Room implements Serializable{
 	
 	private Date dateOfCreate;
 	
-	private Player playerOwn;
-	
 	private int numOfPlayers;
+	
+	private int numMaxPlayers;
 
-	public Room() {
+	public Game() {
 		super();
 	}
 
@@ -45,20 +45,20 @@ public class Room implements Serializable{
 		this.dateOfCreate = dateOfCreate;
 	}
 
-	public Player getPlayerOwn() {
-		return playerOwn;
-	}
-
-	public void setPlayerOwn(Player playerOwn) {
-		this.playerOwn = playerOwn;
-	}
-
 	public int getNumOfPlayers() {
 		return numOfPlayers;
 	}
 
 	public void setNumOfPlayers(int numOfPlayers) {
 		this.numOfPlayers = numOfPlayers;
+	}
+
+	public int getNumMaxPlayers() {
+		return numMaxPlayers;
+	}
+
+	public void setNumMaxPlayers(int numMaxPlayers) {
+		this.numMaxPlayers = numMaxPlayers;
 	}
 
 }
