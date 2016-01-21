@@ -220,29 +220,6 @@ public class PlayerDAO implements Serializable{
 	}
 	
 	/**
-	 * Insere um player na sala
-	 * @param p player
-	 * @return
-	 * @throws SQLException
-	 */
-	public void updateRoom(Player p) throws SQLException{
-		try{
-			this.beforeExecuteQuery();
-
-			this.query = "UPDATE player SET game_play=? WHERE id = ?;";
-			this.queryExec = this.DBConn.prepareStatement(query);
-			this.queryExec.setInt(1, p.getGamePlay().getId());
-			this.queryExec.setInt(2, p.getId());
-			this.queryExec.execute();
-
-			this.afterExecuteQuery();
-			
-		}catch (Exception e){
-			System.out.println("Erro ao editar o registro: :( \n"+e.getMessage());
-		}
-	}
-	
-	/**
 	 * Deleta um player
 	 * @param p player
 	 * @return

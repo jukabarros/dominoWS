@@ -41,10 +41,32 @@
 
 <!-- Index -->
 <navigation-rule>
-	<from-view-id>newPlayer</from-view-id>
+	<from-view-id>newPlayer.xhtml</from-view-id>
      <navigation-case>
       <from-outcome>index</from-outcome>
       <to-view-id>index.xhtml</to-view-id>
+      <redirect />
+	</navigation-case>
+
+</navigation-rule>
+
+<!-- newGame -->
+<navigation-rule>
+	<from-view-id>game.xhtml</from-view-id>
+     <navigation-case>
+      <from-outcome>newGame</from-outcome>
+      <to-view-id>newGame.xhtml</to-view-id>
+      <redirect />
+	</navigation-case>
+
+</navigation-rule>
+
+<!-- Games -->
+<navigation-rule>
+	<from-view-id>newGame.xhtml</from-view-id>
+     <navigation-case>
+      <from-outcome>game</from-outcome>
+      <to-view-id>game.xhtml</to-view-id>
       <redirect />
 	</navigation-case>
 

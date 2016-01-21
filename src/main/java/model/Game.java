@@ -61,4 +61,9 @@ public class Game implements Serializable{
 		this.numMaxPlayers = numMaxPlayers;
 	}
 
+	@Override
+	public String toString() {
+		return "Game [name=" + name + ", numOfPlayers=" + numOfPlayers + "]";
+	}
+
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Game;
+import model.Player;
 import config.DBConnect;
 
 public class GameDAO implements Serializable{
@@ -121,7 +122,7 @@ public class GameDAO implements Serializable{
 	 * @return game sala
 	 * @throws SQLException
 	 */
-	private Game checkName(String name) throws SQLException{
+	public Game getByName(String name) throws SQLException{
 		this.beforeExecuteQuery();
 		this.query = "SELECT id, name, date_create, num_players, num_max_players"
 				+ " FROM game WHERE name = ?;";
@@ -153,20 +154,22 @@ public class GameDAO implements Serializable{
 		int msgCode = 0;
 		try{
 			// Consultando se ja existe
-			Game game = this.checkName(g.getName());
-			if (game == null){
+			Game game = this.getByName(g.getName());
+			if (game.getName() == null){
 				this.beforeExecuteQuery();
 				
-				this.query = "INSERT INTO game (name, date_create, num_max_players) VALUES (?,?,?);";
+				this.query = "INSERT INTO game (name, date_create, num_players,"
+						+ " num_max_players) VALUES (?,?,?,?);";
 				this.queryExec = this.DBConn.prepareStatement(query);
 				this.queryExec.setString(1, g.getName());
 				this.queryExec.setDate(2, g.getDateOfCreate());
-				this.queryExec.setInt(3, g.getNumMaxPlayers());
+				this.queryExec.setInt(3, g.getNumOfPlayers());
+				this.queryExec.setInt(4, g.getNumMaxPlayers());
 				this.queryExec.execute();
 				
 				this.afterExecuteQuery();
 			}else{
-				//"Room já existe no sistema";
+				//"Jogo já existe no sistema";
 				msgCode = 1;
 			}
 			
@@ -199,6 +202,27 @@ public class GameDAO implements Serializable{
 	}
 	
 	/**
+	 * Insere um player na sala
+	 * @param p player
+	 * @return
+	 * @throws SQLException
+	 */
+	public void insertPlayerinGame(Player p, Game g) throws SQLException{
+		try{
+			this.beforeExecuteQuery();
+			this.query = "UPDATE player SET game_play = ? WHERE id = ?;";
+			this.queryExec = this.DBConn.prepareStatement(query);
+			this.queryExec.setInt(1, g.getId());
+			this.queryExec.setInt(2, p.getId());
+			this.queryExec.execute();
+			this.afterExecuteQuery();
+			
+		}catch (Exception e){
+			System.out.println("Erro ao inserir o player na sala :( \n"+e.getMessage());
+		}
+	}
+	
+	/**
 	 * Atualiza o numero de player na sala.
 	 * Verifica se é para adicionar ou remover o player
 	 * 
@@ -227,7 +251,7 @@ public class GameDAO implements Serializable{
 			}
 			
 		}catch (Exception e){
-			System.out.println("Erro ao excluir o registro: :( \n"+e.getMessage());
+			System.out.println("Erro ao atualizar o numero de player na sala :( \n"+e.getMessage());
 		}
 	}
 	

@@ -9,9 +9,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import service.GameService;
 import model.Game;
+import model.Player;
 
 @ManagedBean(name="gameController")
 @ViewScoped
@@ -48,20 +50,24 @@ public class GameController implements Serializable{
 	public String insert() {
 		try{
 			this.game.setDateOfCreate(new java.sql.Date(new Date().getTime()));
-			
+			this.game.setNumOfPlayers(1);
 			int msgCode = this.service.insert(this.game);
 			
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			if (msgCode == 0){
-				// Adicionando o player na sala
-				this.service.updateNumOfPlayers(this.game, "ADD");
+				// Pega o objeto com o ID gerado pelo BD
+				Game g = this.service.getByName(this.game.getName());
 				
-				facesContext.addMessage(null, new FacesMessage("Registro Cadastrado com Sucesso!!")); //Mensagem de validacao 
+				// Inserindo a fk do jogo na coluna da tabela player
+				this.service.insertPlayerinGame(getPlayerinSession(), g);
+				
+				facesContext.addMessage(null, new FacesMessage("Registro cadastrado com sucesso!!")); //Mensagem de validacao 
 				this.game = new Game();
 				this.listGames = this.service.getAll();
+				// return to gamePlay
 			}else{
 				facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-						"Sala já existe no jogo", "")); 
+						"Jogo já existe", "")); 
 			}
 			
 		}catch(Exception e){
@@ -72,6 +78,12 @@ public class GameController implements Serializable{
 		}
 		return null;
 		
+	}
+	
+	private Player getPlayerinSession(){
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Player player = (Player) session.getAttribute("player");
+		return player;
 	}
 	
 	public String findByName(){
@@ -125,8 +137,12 @@ public class GameController implements Serializable{
 		return null;
 	}
 
+	
+	public String gotoListGames(){
+		return "game";
+	}
+	
 	// GET and SET
-
 	public Game getGame() {
 		return game;
 	}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Domino WS</title>
+</h:head>
+<h:body>
+
+<ui:composition template="layout/layout.xhtml">
+<ui:define name="content">
+<h:panelGrid columns="1">
+	<p:panel header="Criar Jogo">
+		<h:form id="links">
+			<h:commandLink value="Voltar" action="#{gameController.gotoListGames}" />
+		</h:form>
+	
+		<h:form id="formCreateGame">
+		<h5><b>* Campos Obrigatórios</b></h5>
+		<p:messages autoUpdate="true" />
+			<h:panelGrid columns="2" cellpadding="4">
+			 Nome*:<p:inputText value="#{gameController.game.name}" label ="Nome" 
+	            		required="true" requiredMessage="Campo Nome é obrigatório" />
+			
+			 Número de Jogadores:
+			 			<h:selectOneMenu id="numPlayer"	value="#{gameController.game.numMaxPlayers}">
+							<f:selectItem itemValue="2" itemLabel="2" />
+							<f:selectItem itemValue="4" itemLabel="4" />
+						</h:selectOneMenu>
+			  &nbsp;
+        	  <h:commandButton type="submit" value="Criar" action="#{gameController.insert}" /> 
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+</h:panelGrid>
+</ui:define>
+</ui:composition>
+</h:body>
+</html>

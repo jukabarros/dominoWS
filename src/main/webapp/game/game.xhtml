@@ -10,42 +10,25 @@
 <title>Domino WS</title>
 </h:head>
 <h:body>
-<p:panel id="panelHeader">
-<h:panelGrid columns="2" id="panelGridHeader" width="100%">
-<h2>Dominó WebSocket</h2>
 
-	<h:form>
-		<div align="right">
-		<h:panelGrid columns="2" id="panelGridHeaderModulo2">
-	
-		    <p:menuButton  value="#{loginController.player.login}">
-		    	<p:menuitem value="Dados Pessoais" actionListener="#" />
-		        <p:menuitem value="Sair" action="#{loginController.doLogout}" />
-		    </p:menuButton>
-		    
+<ui:composition template="layout/layout.xhtml">
+<ui:define name="content">
+
+	<h:form id="formPesquisar">     
+		<h:panelGrid columns="5"> 
+		   <h:outputText value="Jogo: " />
+		   <h:inputText id="idSearch" value="#{gameController.searchInput}"
+		   	 name="searchGame" label ="search" size="50" />   
+		   <h:commandButton value ="Pesquisar" title="Pesquisar" 
+		   	 action="#{gameController.findByName}" id="searchGame" />
+			 
+		   <h:button type="button" value="Novo Jogo" outcome="newGame" />
+		   
+		   <h:commandButton value ="Atualizar lista" title="Atualizar lista" 
+		   	 action="#{gameController.refreshListRooms}" />
+	   
 		</h:panelGrid>
-		</div>
-	</h:form>
-
-</h:panelGrid>
-</p:panel>
-
-<h:panelGrid columns="4" cellpadding="3"> 
-	<h:form id="formPesquisar">      
-	
-	   <h:inputText id="idSearch" value="#{gameController.searchInput}"
-	   	 name="searchRoom" label ="search" />   
-	   <h:commandButton value ="Pesquisar" title="Pesquisar" 
-	   	 action="#{gameController.findByName}" id="searchGame" />
-		 
-	   <!-- Linkando Para Outra Pagina JSF outcome="Arquivo.jsf"  --> 
-	   <h:button type="button" value="Novo" outcome="newGame" />
-	   
-	   <h:commandButton value ="Atualizar" title="Atualizar" 
-	   	 action="#{gameController.refreshListRooms}" />
-	   
  </h:form>
-</h:panelGrid>
 
 <p:panel id="gamesPanel" header="Jogos" style="text-align:center;width:auto;" >		
 	    		
@@ -103,5 +86,7 @@
 		
 </p:panel>
 
+</ui:define>
+</ui:composition>
 </h:body>
 </html>

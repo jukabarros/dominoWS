@@ -70,12 +70,4 @@ public class PlayerService implements Serializable{
 		}
 	}
 	
-	public void updateRoom(Player p){
-		try {
-			this.dao.updateRoom(p);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 }
