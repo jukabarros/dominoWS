@@ -16,7 +16,7 @@
 
 	<h:form id="formPesquisar">     
 		<h:panelGrid columns="5"> 
-		   <h:outputText value="Jogo: " />
+		   <p:outputLabel value="Jogo: " />
 		   <h:inputText id="idSearch" value="#{gameController.searchInput}"
 		   	 name="searchGame" label ="search" size="50" />   
 		   <h:commandButton value ="Pesquisar" title="Pesquisar" 
@@ -64,7 +64,9 @@
  					<f:facet name="header">
 				<h:outputText value="Data" />
 					</f:facet>
-					<h:outputText value="#{g.dateOfCreate}"  />	
+					<h:outputText value="#{g.dateOfCreate}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>	
  				</p:column>
 	 				
 	 								

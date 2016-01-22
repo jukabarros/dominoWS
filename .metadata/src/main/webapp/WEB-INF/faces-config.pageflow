@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14527147642060" configfile="/dominoWS/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="370" id="pf14530518244950" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" outlinks="pf14530582338850 pf14533265141200" inlinks="pf14530518244952 pf14534201390886" path="index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="370" id="pf14530518244950" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" outlinks="pf14530582338850 pf14533265141200" inlinks="pf14530518244952 pf14534201390886" path="/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="178" id="pf14530518244954" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14530518244952" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="newPlayer.xhtml" x="554" y="562" id="pf145305195137613" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf14534201390886" inlinks="pf14530582338850" path="newPlayer.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="game/game.xhtml" id="pf14533265141201" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14533265141200" path="/game/game.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="game.xhtml" id="pf14534139751434" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" outlinks="pf14534201313423" inlinks="pf14534201313424" path="game.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="newGame.xhtml" id="pf14534201313425" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf14534201313424" inlinks="pf14534201313423" path="newGame.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="game.xhtml" id="pf14534139751434" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" outlinks="pf14534201313423" inlinks="pf14534201313424" path="/game/game.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="newGame.xhtml" id="pf14534201313425" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf14534201313424" inlinks="pf14534201313423" path="/game/newGame.xhtml"/>
   <links id="pf14530518244952" target="pf14530518244950" source="pf14530518244954" outcome="logout" redirect="true"/>
   <links id="pf14530582338850" target="pf145305195137613" source="pf14530518244950" outcome="newPlayer" redirect="true"/>
   <links id="pf14533265141200" target="pf14533265141201" source="pf14530518244950" outcome="login" redirect="true"/>

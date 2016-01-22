@@ -6,9 +6,9 @@
     version="2.2">
 
 
-<!-- Login -->
+<!-- Tela Login -->
 <navigation-rule>
-	<from-view-id>index.xhtml</from-view-id>
+	<from-view-id>/index.xhtml</from-view-id>
      <navigation-case>
       <from-outcome>login</from-outcome>
       <to-view-id>/game/game.xhtml</to-view-id>
@@ -25,48 +25,47 @@
       <to-view-id>index.xhtml</to-view-id>
       <redirect />
 	</navigation-case>
-
 </navigation-rule>
 
-<!-- newPlayer -->
+<!-- index - newPlayer -->
 <navigation-rule>
-	<from-view-id>index.xhtml</from-view-id>
+	<from-view-id>/index.xhtml</from-view-id>
      <navigation-case>
       <from-outcome>newPlayer</from-outcome>
-      <to-view-id>newPlayer.xhtml</to-view-id>
+      <to-view-id>/newPlayer.xhtml</to-view-id>
       <redirect />
 	</navigation-case>
 
 </navigation-rule>
 
-<!-- Index -->
+<!-- NewPlayer - Index -->
 <navigation-rule>
-	<from-view-id>newPlayer.xhtml</from-view-id>
+	<from-view-id>/newPlayer.xhtml</from-view-id>
      <navigation-case>
       <from-outcome>index</from-outcome>
-      <to-view-id>index.xhtml</to-view-id>
+      <to-view-id>/index.xhtml</to-view-id>
       <redirect />
 	</navigation-case>
 
 </navigation-rule>
 
-<!-- newGame -->
+<!-- newGame - game -->
 <navigation-rule>
-	<from-view-id>game.xhtml</from-view-id>
+	<from-view-id>/game/game.xhtml</from-view-id>
      <navigation-case>
       <from-outcome>newGame</from-outcome>
-      <to-view-id>newGame.xhtml</to-view-id>
+      <to-view-id>/game/newGame.xhtml</to-view-id>
       <redirect />
 	</navigation-case>
 
 </navigation-rule>
 
-<!-- Games -->
+<!-- game - newGame -->
 <navigation-rule>
-	<from-view-id>newGame.xhtml</from-view-id>
+	<from-view-id>/game/newGame.xhtml</from-view-id>
      <navigation-case>
       <from-outcome>game</from-outcome>
-      <to-view-id>game.xhtml</to-view-id>
+      <to-view-id>/game/game.xhtml</to-view-id>
       <redirect />
 	</navigation-case>
 
